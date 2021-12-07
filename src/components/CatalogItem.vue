@@ -11,7 +11,7 @@
         <p class="catalog-container__price">Price: {{productData.price}} UAH</p>
         <button 
           class="catalog-container__btn primary-btn" 
-          @click="sendData">
+          @click="addToCard">
             Add to card
         </button>
       </div>
@@ -32,8 +32,8 @@ export default {
     },
   },
   methods: {
-    sendData() {
-      this.$emit('sendArticle', this.productData.article)
+    addToCard() {
+      this.$emit('addToCard' ,this.productData)
     }
   },
   computed: {
@@ -43,6 +43,9 @@ export default {
         image: this.productData.image && require(`../assets/images/${this.productData.image}`)
       }
     }
+  },
+  mounted() {
+    this.$set(this.productData, 'quantity', 1)
   }
 }
 </script>

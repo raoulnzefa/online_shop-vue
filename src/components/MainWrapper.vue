@@ -1,31 +1,23 @@
 <template>
   <div class="main-wrapper">
-    <catalog />
-  </div>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+  </div> 
 </template>
 
 <script>
-import Catalog from './Catalog.vue'
 
 export default {
   name: "MainWrapper",
   components: {
-    Catalog,
   },
 
   props: {},
   data() {
     return {
     };
-  },
-
-  computed: {},
-  methods: {},
-  watch: {},
-
-  mounted() {
-    console.log("I`m mounted hook");
-  },
+  }
 };
 </script>
 

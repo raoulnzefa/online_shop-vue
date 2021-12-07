@@ -1,12 +1,16 @@
 <template>
   <div class="catalog">
+    <router-link :to="{name: 'Card', params: {cardData: CARD}}">
+      <div class="catalog-link-to-card">Card: {{CARD.length}}</div>
+    </router-link>
+    
     <h1>Catalog</h1>
     <div class="catalog__list">
       <catalog-item
         v-for="product in PRODUCTS"
         :key="product.article"
         :productData="product"
-        @sendArticle="showChildArcticle"
+        @addToCard="addToCard"
       />
     </div>
   </div>
@@ -26,15 +30,17 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'PRODUCTS'
+      'PRODUCTS',
+      'CARD'
     ])
   },
   methods: {
     ...mapActions([
-      'GET_PRODUCTS_FROM_API'
+      'GET_PRODUCTS_FROM_API',
+      'ADD_TO_CARD'
     ]),
-    showChildArcticle(data) {
-      console.log(data)
+    addToCard(data) {
+      this.ADD_TO_CARD(data)
     }
   },
   mounted() {
@@ -55,6 +61,13 @@ export default {
       flex-wrap: wrap;
       margin-right: -10px;
       margin-left: -10px;
+    }
+    &-link-to-card {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 15px;
+      border: 1px solid #aeaeae;
     }
   }
 </style>
